@@ -1,0 +1,79 @@
+{
+  "name": "genpark-agentic-commerce-cbam-embedded-carbon-accounting-skill",
+  "version": "1.0.0",
+  "title": "EU CBAM Embedded Carbon Accounting & Tariff Estimator Skill",
+  "description": "EU Carbon Border Adjustment Mechanism (CBAM) direct/indirect specific embedded emissions factor calculation (tCO2e/tonne) across imported goods. Built for GenPark (https://www.genpark.ai).",
+  "homepage": "https://www.genpark.ai",
+  "linkedin": "https://www.linkedin.com/company/92955550",
+  "category": "agentic-commerce",
+  "topics": [
+    "cbam",
+    "carbon-tariff",
+    "eu-import-compliance",
+    "embedded-emissions",
+    "agentic-commerce",
+    "model-context-protocol",
+    "genpark"
+  ],
+  "tools": [
+    {
+      "name": "calculate_cbam_embedded_carbon_liability",
+      "description": "Calculate CBAM certificate liability from imported tonnage, specific embedded emissions (tCO2e/tonne), and EU ETS carbon price.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "goods_category": {
+            "type": "string",
+            "enum": [
+              "steel",
+              "aluminum",
+              "cement",
+              "fertilizer",
+              "hydrogen"
+            ]
+          },
+          "imported_metric_tonnes": {
+            "type": "number"
+          },
+          "specific_embedded_emissions_tco2e_per_t": {
+            "type": "number"
+          },
+          "eu_ets_carbon_price_eur": {
+            "type": "number"
+          },
+          "carbon_price_paid_origin_eur": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "goods_category",
+          "imported_metric_tonnes",
+          "specific_embedded_emissions_tco2e_per_t"
+        ]
+      }
+    },
+    {
+      "name": "generate_cbam_quarterly_reporting_payload",
+      "description": "Compile official XML/JSON reporting data block for EU CBAM Transitional Registry submission.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "importer_eori": {
+            "type": "string"
+          },
+          "installation_country": {
+            "type": "string"
+          },
+          "total_embedded_emissions_tco2e": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "importer_eori",
+          "installation_country",
+          "total_embedded_emissions_tco2e"
+        ]
+      }
+    }
+  ]
+}
